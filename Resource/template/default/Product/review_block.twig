@@ -1,0 +1,35 @@
+{% block plugin_product_review %}
+<div class="ec-grid1">
+    <div class="ec-grid1__cell">
+        <div>
+            <dl>
+                <dt style="padding: 16px; font-weight: bold; font-size: 2.4rem; background: #EFEFEF; margin: 0">
+                    この商品のレビュー
+                </dt>
+                <dd>
+                    <ul style="list-style-type: none">
+                        {% for ProductReview in Product.ProductReviews %}
+                            <li style="padding: 8px 0">
+                                <p style="font-weight: bold; margin: 0">
+                                    {{ ProductReview.create_date|date_format }}
+                                    <span style="margin-left: 16px">{{ ProductReview.reviewer_name }}さん</span>
+                                    <span style="margin-left: 16px; color: #DE5D50">{{ php_str_repeat('★', ProductReview.recommend_level) }}{{ php_str_repeat('☆', (5 - ProductReview.recommend_level)) }}</span>
+                                </p>
+                                <strong>{{ ProductReview.title }}</strong>
+                                <p>{{ ProductReview.comment }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <div class="ec-RegisterRole__actions">
+            <div class="ec-off4Grid">
+                <div class="ec-off4Grid__cell">
+                    <a href="{{ url('plugin_product_review', {'id':Product.id}) }}" class="ec-blockBtn--cancel">レビューを書く</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
